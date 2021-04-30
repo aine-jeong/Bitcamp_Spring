@@ -30,6 +30,7 @@ view.setRecord(record); //setter주입 (다형성) >> DI
 
 <bean class="Spring_DI4.NewRecordView" id="view">
 	<property name="record" ref="record"></property> <!-- 자동 setter 동작 -->
+	<!-- java코드 : view.setRecord(record); -->
 </bean>
 <!-- property name은 setter함수를 구현하고 있는 member field명을 쓰시면 됩니다. -->
 <!-- java코드: NewRecordView view = new NewRecordView() -->

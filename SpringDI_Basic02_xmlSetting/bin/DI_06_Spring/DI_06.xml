@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+객체의 생성과 조립(주입)
+
+* Spring은 자신만의 [컨테이너(Spring 전용 메모리공간)] 제공 (IOC)
+* xml 또는 annotation을 통해서 객체의 생성과 조립을 수행한다(객체간의 관계 설정)
+
+ApplicationContext context = ... >> 컨테이너 생성 (DI_05.xml)
+DI_05.xml문서를 read해서 안에 있는 코드를 실행 (객체 생성과 의존관계 설정)
+
+context(컨테이너) 안에서 필요한 자원(객체)을 불러서 사용!
+
+:제어의 역전 (프로그램의 제어 구조가 바뀐다)
+:작은 단위의 부품을 만들어 놓고 그것을 조립하는 행위 (레고블럭처럼!)
+https://cage.naver.com/bit2021/952 참조
+
+java코드
+OracleArticleDao articledao = new OracleArticleDao();
+MysqlArticleDao articledao = new MysqlArticleDao();
+ArticleService articleservice = new ArticleService(articledao);
+		
+Article article = new Article();
+-->
+
+	<!--  <bean id="articledao" class="DI_06_Spring.OracleArticleDao"></bean>  -->
+	<bean id="articledao" class="DI_06_Spring.MysqlArticleDao"></bean>
+	<bean id="articleservice" class="DI_06_Spring.ArticleService">
+		<!-- 값이 아니라 주소값 주입 -->
+		<constructor-arg>
+			<ref bean="articledao" />
+		</constructor-arg>
+	</bean>
+	<!-- ArticleService articleservice = new ArticleService(articledao); -->
+	
+	<bean id="article" class="DI_06_Spring.Article"></bean>
+	
+
+
+</beans>

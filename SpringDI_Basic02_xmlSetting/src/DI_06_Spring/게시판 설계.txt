@@ -1,0 +1,21 @@
+
+====
+MVC게시판
+
+Model (dto, dao, service)
+View (jsp)
+Controller (servlet)
+
+클라이언트 요청 -> Controller -> Service -> dao, dto -> Service -> Controller -> View -> 응답
+
+1. 요구사항
+DB를 2개 사용: Oracle 연동, MYsql 연동
+create table Article()
+
+Model
+1. dto > Article
+2. dao > ArticleDao (DB연결, CRUD) > 인터페이스 기반 설계 > 강제하는 함수는 추상자원으로
+2.1 ArticleDao 인터페이스 구현 > OracleDao
+							> MysqlDao 구현
+3. service 에서 DAO 생성 함수 호출
+>>service 클래스는 ArticleDao 의존한다

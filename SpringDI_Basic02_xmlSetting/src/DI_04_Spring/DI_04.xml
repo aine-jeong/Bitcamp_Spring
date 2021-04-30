@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 
+객체의 생성과 조립(주입)
+
+java:
+	>>생성자를 통해서 주입
+	MessageBeanImpI messagebean = new MessageBeanImpI("hong");
+	
+	>>setter를 통해서 주입
+	messagebean.setGreeting("hello");
+	
+	## DI 문법 ##
+	객체 생성 
+	- id는 식별자로 사용 / 한개의 이름
+	- name: 여러개의 이름 (구분자는 / 쉼표, 공백, 세미콜론 / 모두 가능)
+	<bean id="식별자" name="m1,m2 m3;m4" class="DI_04_Spring.MessageBeanImpI">
+	
+-->
+
+	<bean id="messagebean" name="m1,m2 m3;m4" class="DI_04_Spring.MessageBeanImpI">
+		<!-- <constructor-arg>
+			<value>hong</value>
+		</constructor-arg>
+		
+		name: setGreeting() 함수를 구현하고 있는 member field명
+		<property name="greeting">
+			<value>hello</value>
+		</property> -->
+		
+		<constructor-arg value="hong" />
+		<property name="greeting" value="hello" />
+	</bean>
+
+</beans>
