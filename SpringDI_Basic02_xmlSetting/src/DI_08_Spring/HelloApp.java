@@ -11,6 +11,23 @@ public class HelloApp {
 
 	public static void main(String[] args) {
 		
+		/*
+		//java코드
+		JobExecute jobexecute = new JobExecute("hong", 100);
+		
+		//JobExecute jobexecute2 = new JobExecute("hong", 100L);
+		//JobExecute jobexecute3 = new JobExecute("hong", "kim");
+		
+		ArticleDao articledao = new ArticleDao();
+		jobexecute.setArticledao(articledao);
+		
+		jobexecute.setData(500);
+		*/
+		
+		ApplicationContext context = 
+				new GenericXmlApplicationContext("classpath:DI_08_Spring/DI_08.xml");
+		
+		
 	}
 
 }

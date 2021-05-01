@@ -14,8 +14,41 @@ Spring 자신만의 [컨테이너(Spring 전용 메모리 공간)] 제공 (IOC) 
 :제어의 역전 (프로그램의 제어구조를 바꾼다)
 :작은 단위의 부품을 만들어 놓고 그 것을 조립하는 행위 (레고 블럭 처럼)
 
-	
+//java코드
+JobExecute jobexecute = new JobExecute("hong", 100);
+		
+//JobExecute jobexecute2 = new JobExecute("hong", 100L);
+//JobExecute jobexecute3 = new JobExecute("hong", "kim");
+		
+ArticleDao articledao = new ArticleDao();
+jobexecute.setArticledao(articledao);
+		
+jobexecute.setData(500);
 -->
+
+ <bean id="articleDao" class="DI_08_Spring.ArticleDao"></bean>
+ <bean id="jobExecute" class="DI_08_Spring.JobExecute">
+ 	<constructor-arg>
+ 		<value>hong</value>
+ 	</constructor-arg>
+ 	<constructor-arg>
+ 		<value type="long">100</value>
+ 	</constructor-arg>
+ 	<!-- 
+ 		타입을 명시하지 않은 모든 값은 문자열(String)로 전달
+ 		타입을 명시하기 위해 value에 type넣을 수 있음
+ 	-->
+ 	
+ 	
+ 	<property name="articledao">
+ 		<ref bean="articleDao" />
+ 	</property>
+ 	
+ 	<property name="data">
+ 		<value>500</value>
+ 	</property>
+ </bean>
+ 
 	
 	
 </beans>

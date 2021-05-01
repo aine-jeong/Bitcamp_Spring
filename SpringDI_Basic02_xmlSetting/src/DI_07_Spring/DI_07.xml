@@ -15,15 +15,49 @@ Spring 자신만의 [컨테이너(Spring 전용 메모리 공간)] 제공 (IOC) 
 :작은 단위의 부품을 만들어 놓고 그 것을 조립하는 행위 (레고 블럭 처럼)
 
 JAVA 코드
+
+	ProtocolHandler handler = new ProtocolHandler();
+		
+	List<MyFilter> list = new ArrayList<MyFilter>();
+	list.add(new EncFilter()); //다형성
+	list.add(new HeaderFilter());
+	list.add(new ZipFilter());
+		
+	handler.setFilters(list); //객체 주입(Injection)
 		
 		
-		1단계
-		필요한 모든 bean 객체 생성해라 (new 자원  >> bean  객체 생성)
-		사용자가 직접 만들지 않은 클래스 (JAVA API) >> Collection 클래스
+	1단계
+	필요한 모든 bean 객체 생성해라 (new 자원  >> bean  객체 생성)
+	사용자가 직접 만들지 않은 클래스 (JAVA API) >> Collection 클래스
 		>> spring 에서  요소로 제공 
-		>> <list>  ,  <map> , <set>
+		>> <list> , <map> , <set>
 -->
 
+<!-- 
+	<bean id="encFilter"	 class="DI_07_Spring.EncFilter"></bean>
+	<bean id="headerFilter"	 class="DI_07_Spring.HeaderFilter"></bean>
+	<bean id="zipFilter"	 class="DI_07_Spring.ZipFilter"></bean>
+	
+	<bean id="protocolHandler" class="DI_07_Spring.ProtocolHandler">
+		<property name="filters">
+			<list> new ArrayList
+				<ref bean="encFilter" /> 	[0] list.add(new EncFilter());
+				<ref bean="headerFilter" /> [1] list.add(new HeaderFilter());
+				<ref bean="zipFilter" /> 	[2] list.add(new ZipFilter());
+			</list>
+		</property>
+	</bean>
+-->
+
+	<bean id="protocolHandler" class="DI_07_Spring.ProtocolHandler">
+		<property name="filters">
+			<list>
+				<bean class="DI_07_Spring.EncFilter"></bean>
+				<bean class="DI_07_Spring.HeaderFilter"></bean>
+				<bean class="DI_07_Spring.ZipFilter"></bean>
+			</list>
+		</property>
+	</bean>
 	
 	
 </beans>
