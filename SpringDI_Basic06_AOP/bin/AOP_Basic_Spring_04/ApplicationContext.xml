@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context 
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!-- 
+		//1. 실객체의 주소
+		Calc calc = new NewCalc();
+		
+		//2. 가짜(Proxy)를 생성
+		Calc cal = (Calc)Proxy.newProxyInstance(calc.getClass().getClassLoader(), //실 객체의 메타 정보(내부 정보)
+								calc.getClass().getInterfaces(), //행위 정보(Interface의 정보)
+								new LogPrintHandler(calc)); //보조객체의 정보
+	 
+	 Spring
+	 1. 프록시 객체 생성: org.springframework.aop.framework.ProxyFactoryBean
+	 2. bean 객체 생성: LogPrintAroundAdvice
+	 3. bean 객체 생성: LogPrintBeforeAdvice
+	 
+	 하나의 함수가 동작할 때 여러개의 보조업무 수행 가능(advice)
+	 
+	 -->
+	 
+	 <bean id="calc" class="AOP_Basic_Spring_04.NewCalc"></bean>
+	 <bean id="logPrintAroundAdvice" class="AOP_Basic_Spring_04.LogPrintAroundAdvice"></bean>
+	 <bean id="logPrintBeforeAdvice" class="AOP_Basic_Spring_04.LogPrintBeforeAdvice"></bean>
+	 
+	 <!-- Spring에서 제공하는 Proxy객체 만들기 -->
+	 <bean id="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+	 	<!-- 행위 정보 -->
+	 	<property name="proxyInterfaces">
+	 		<list>
+	 			<value>AOP_Basic_Spring_04.Calc</value>
+	 		</list>
+	 	</property>
+	 	<!-- 실객체의 주소 -->
+	 	<property name="target" ref="calc" />
+	 	<!-- 보조프로그래밍(Advice를 가지는 보조업무객체) -->
+	 	<property name="interceptorNames">
+	 		<list>
+	 			<!-- <value>logPrintAroundAdvice</value> -->
+	 			<value>logPrintBeforeAdvice</value>
+	 		</list>
+	 	</property>
+	 </bean>
+	 
+	 
+</beans> 
+
+
+
+
