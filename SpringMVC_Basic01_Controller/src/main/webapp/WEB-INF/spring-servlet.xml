@@ -21,6 +21,7 @@
 		-->
 		
 		<bean id="/hello.do" class="kr.or.bit.HelloController"></bean>
+		<bean id="/intro.do" class="kr.or.bit.IntroController"></bean>
 		
 		<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 			<property name="prefix">
@@ -30,6 +31,7 @@
 				<value>.jsp</value>
 			</property>
 		</bean>
+		
 </beans> 
 
 

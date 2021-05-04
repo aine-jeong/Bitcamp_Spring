@@ -14,7 +14,7 @@ public class HelloController implements Controller{
 	}
 
 	@Override
-	public ModelAndView handleRequest(HttpServletRequest arg0, HttpServletResponse arg1) throws Exception {
+	public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		//자동 호출되는 곳 (doGet, doPost처럼!)
 		System.out.println("HelloController 요청 실행: handleRequest 함수 실행");
 		

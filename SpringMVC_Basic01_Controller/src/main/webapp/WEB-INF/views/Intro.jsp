@@ -7,9 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h3>Spring MVC 요청하기</h3>
-	<a href="hello.do">hello.do 요청하기</a>
-	<a href="intro.do">intro.do 요청하기</a>
-	<a href="index.action">index.action 요청하기</a>
+	<h3>Intro</h3>
+	VIEW: ${name}
 </body>
 </html>
