@@ -40,6 +40,7 @@ public class NoticeDao {
 	}
 	
 	//전체 게시물
+	//몇번째 페이지의 어떤 필드, 어떤 쿼리인지를 파라미터로 받는다.
 	public List<Notice> getNotices(int page, String field, String query) throws ClassNotFoundException, SQLException
 	{					
 		
@@ -161,7 +162,6 @@ public class NoticeDao {
 
 	//게시물 입력
 	public int insert(Notice n) throws ClassNotFoundException, SQLException {
-		// TODO Auto-generated method stub
 		String sql = "INSERT INTO NOTICES(SEQ, TITLE, CONTENT, WRITER, REGDATE, HIT, FILESRC) VALUES( (SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES), ?, ?, 'bituser', SYSDATE, 0, ?)";
 		// 0. 드라이버 로드
 		Class.forName("oracle.jdbc.driver.OracleDriver");

@@ -2,8 +2,6 @@
 
 고전적인 Spring 기반의 서비스
 
-
-
 Spring 사용 LIB :
 MAIN
 
@@ -23,7 +21,7 @@ Model 유지
 View 유지
 Controller =>  DispatcherServlet => 사용하는 서비스 class 제작
 
-3. Controller 역활을 하는 클래스 제작 
+3. Controller 역할을 하는 클래스 제작
    => NoticeController 클래스 
    단 이 클래스는 implements Controller 구현 하여야 한다
    =>handleRequest 메서드가 모든 처리 담당

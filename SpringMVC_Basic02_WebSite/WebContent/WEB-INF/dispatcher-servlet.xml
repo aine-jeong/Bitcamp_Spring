@@ -22,8 +22,17 @@ IOC 컨테이너에 적재될 bean 객체 생성과 injection (DI)
           
   localhost:8090/website/customer/notice.htm
 -->	
-<!-- 모든 컨트롤러가 공통 사용 DAO 빈 객체  참조-->
+<!-- 모든 컨트롤러가 공통 사용 DAO 빈 객체 참조-->
 
+<bean id="noticeDao" class="dao.NoticeDao"></bean>
+<!-- 컨트롤러는 DAO에 의존한다 (의존관계) -> 주입해야한다. -->
+<bean id="/customer/notice.htm" class="controllers.customer.NoticeController">
+	<property name="noticedao" ref="noticeDao" />
+</bean>
+
+<bean id="/customer/noticeDetail.htm" class="controllers.customer.NoticeDetailController">
+	<property name="noticedao" ref="noticeDao" />
+</bean>
 	
 </beans> 
 
