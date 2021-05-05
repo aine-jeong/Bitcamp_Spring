@@ -99,10 +99,8 @@ result : UserDao 추상클래스 (DB연결 메서는 강제 구현 (추상메서
    N사와 D사가 연결하는 객체는 자신의 회사가 정의하는 이름으로..
    -SimpleConnection_N_Maker 클래스 각각의 회사가 정의
    
-                         
-   
-   이슈 : UserDao 가  SimpleConnectionMaker 의존관계
-          [느슨하게] 가져가고 싶다 (확장성을 고려해서 == 다형성)
+  이슈 : UserDao 가  SimpleConnectionMaker 의존관계
+        [느슨하게] 가져가고 싶다 (확장성을 고려해서 == 다형성)
                                 
   해결방법 : 인터페이스(Interface 사용) > 다형성                          
    
@@ -111,8 +109,6 @@ result : UserDao 추상클래스 (DB연결 메서는 강제 구현 (추상메서
  결국에는 의존성 주입 (생성자를 통해서)
  UserDao dao = new UserDao(new NConnectionMaker());
  => UserDao 가 필요로하는 객체를 넣어준것
- 
-
 
 Spring > 인터페이스 기반 다형성 > 코드를 제공
 
