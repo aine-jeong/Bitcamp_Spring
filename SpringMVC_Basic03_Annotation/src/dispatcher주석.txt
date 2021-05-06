@@ -1,0 +1,28 @@
+<!-- 
+		상단에 설정해두면!
+		context:annotation-config 태그는 어노테이션과 관련해서 
+		
+		다음의 BeanPostProcessor를 함께 등록 한다.
+		- @Required(RequiedAnnotationBeanPostProcessor)
+		- @Autowired(AutowiredAnnotationBeanPostProcessor)
+		- @Resource, @PostConstruct, @PreDestory(CommonAnnotationBeanPostProcessor)
+		- @Configuration(ConfigurationClassPostProcessor)
+	-->
+	
+	<!-- 
+		자동 빈객체 생성 : <context:component-scan>
+		<context:component-scan base-package="com.controller"
+		공통빈
+		@Controller
+		Presentation Layer에서 Contoller를 명시하기 위해서 사용
+		
+		@Service
+		Business Layer에서 Service를 명시하기 위해서 사용
+		
+		@Repository 
+		Persistence Layer에서 DAO를 명시하기 위해서 사용
+		
+		@Component
+		그 외에 자동으로 스캔해서 등록하고 싶은 것들을 위해 사용
+	-->
+	<!-- @Autowired 자동 처리를 빈객체 자동 생성 등록 -->

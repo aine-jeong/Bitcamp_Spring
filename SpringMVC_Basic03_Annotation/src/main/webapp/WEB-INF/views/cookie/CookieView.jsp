@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-			<h3>VIEW : ${greeting}</h3>
+	<h3>CookieView</h3>
 </body>
 </html>

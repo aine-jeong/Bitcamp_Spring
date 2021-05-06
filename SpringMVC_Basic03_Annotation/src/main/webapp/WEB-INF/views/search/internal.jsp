@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-			<h3>VIEW : ${greeting}</h3>
+	VIEW 단 페이지 parameter 처리
 </body>
 </html>
