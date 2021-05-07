@@ -129,8 +129,7 @@ public class NoticeDao {
 	}
 	
 	//게시물 상세
-	public Notice getNotice(String seq) throws ClassNotFoundException, SQLException
-	{
+	public Notice getNotice(String seq) throws ClassNotFoundException, SQLException{
 		String sql = "SELECT * FROM NOTICES WHERE SEQ="+seq;
 		// 0. 드라이버 로드
 		Class.forName("oracle.jdbc.driver.OracleDriver");

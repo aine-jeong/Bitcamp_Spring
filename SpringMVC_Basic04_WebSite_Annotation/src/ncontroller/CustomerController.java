@@ -1,13 +1,20 @@
 package ncontroller;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import dao.NoticeDao;
@@ -157,6 +164,7 @@ public class CustomerController {
 		return "noticeDetail.jsp";
 	}
 	
+	
 	//글쓰기 화면 (GET)
 	@RequestMapping(value="noticeReg.htm", method = RequestMethod.GET)
 	public String noticeReg() {
@@ -166,12 +174,102 @@ public class CustomerController {
 	
 	//글쓰기 처리(POST)
 	@RequestMapping(value="noticeReg.htm", method = RequestMethod.POST)
-	public String noticeReg(Notice n) {
+	public String noticeReg(Notice n ,HttpServletRequest request) {
 		System.out.println(n.toString());
-		return null;
+		
+		//cos.jar 자동 파일 업로드
+		//실제 파일 업로드 구현 
+		String filename = n.getFile().getOriginalFilename();
+		String path = request.getServletContext().getRealPath("/customer/upload"); //배포된 서버 경로
+		String fpath = path + "\\" + filename;
+		System.out.println(fpath);
+		
+		FileOutputStream fs = null;
+		try {
+			fs = new FileOutputStream(fpath);
+			fs.write(n.getFile().getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//파일명 추출 (DTO)
+		n.setFileSrc(filename);
+		
+		try {
+			noticedao.insert(n); //DB insert
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//insert나 update 하고나서 F5 누르면 계속 글이 써진당... 
+		//so, 이동시켜야된다 -> 리스트로!
+		//서버에게 새로운 요청(목록보기)  / ##목록재요청##
+		//Spring) redirect:notice.htm
+		//Servlet, jsp) location.href / response.sendRedirect
+		
+		return "redirect:notice.htm";
 	}
 	
 	//글 수정 화면 (GET)
-	//글 수정 처리 (POST)
+	@RequestMapping(value="noticeEdit.htm", method = RequestMethod.GET)
+	public String noticeEdit(String seq, Model model) {
+		//noticedao.getNotice(seq) 활용
+		
+		System.out.println("글번호뭔데? " + seq);
+		
+		Notice notice = null;
+		try {
+			notice = noticedao.getNotice(seq);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("notice", notice);
+		
+		return "noticeEdit.jsp";
+	}
 	
+	//글 수정 처리 (POST)
+	@RequestMapping(value="noticeEdit.htm", method = RequestMethod.POST)
+	public String noticeEdit(Notice n, HttpServletRequest request) {
+		//파일 업로드 가능하게 하세용
+		String filename = n.getFile().getOriginalFilename();
+		String path = request.getServletContext().getRealPath("/customer/upload"); //배포된 서버 경로
+		String fpath = path + "\\" + filename;
+		System.out.println(fpath);
+		
+		FileOutputStream fs = null;
+		try {
+			fs = new FileOutputStream(fpath);
+			fs.write(n.getFile().getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				fs.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		//파일명 추출 (DTO)
+		n.setFileSrc(filename);
+		
+		try {
+			noticedao.update(n); //DB update
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		//다시 상세페이지로 redirect
+		return "redirect:noticeDetail.htm?seq="+n.getSeq();
+	}
 }

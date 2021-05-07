@@ -2,6 +2,8 @@ package vo;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+
 public class Notice {
 	private String seq;
 	private String title;
@@ -11,9 +13,25 @@ public class Notice {
 	private int hit;
 	private String content;
 	
+	//파일 업로드
+	//POINT
+	private CommonsMultipartFile file; //업로드한 파일 정보를 담는 변수
+	//단 조건 : <input type="file" name="file" ...
+	//다중파일은 list
+	
+	public CommonsMultipartFile getFile() {
+		return file;
+	}
+	public void setFile(CommonsMultipartFile file) {
+		this.file = file;
+	}
+	
+	
+	
 	public String getFileSrc() {
 		return fileSrc;
 	}
+	
 	public void setFileSrc(String fileSrc) {
 		this.fileSrc = fileSrc;
 	}
