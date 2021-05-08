@@ -33,14 +33,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public void setJdbctemplate(JdbcTemplate jdbctemplate) {
 		this.jdbctemplate = jdbctemplate;
 	}
-
-	
 	
 	@Override
 	public boolean memberInsert(String id, String name, String pwd, String email, int age) {
 		String sql="insert into usermember(id,name,pwd,email,age) values(?,?,?,?,?)";
 		boolean result = false;
-		
 				
 		Object[] params = {id,name,pwd,email,age};
 		if(this.jdbctemplate.update(sql,params) > 0)
@@ -96,7 +93,6 @@ public class MemberDAOImpl implements MemberDAO{
 		Object[] params = {id,pwd};
 		/*
 		 this.jdbctemplate.queryForList(sql,params) return List<>   게시판 전체 조회 , 회원목록 조회
-		 * 
 		 */
 		
 		if(this.jdbctemplate.queryForList(sql,params).size() > 0 ) {

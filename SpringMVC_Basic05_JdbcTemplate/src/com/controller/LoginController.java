@@ -30,8 +30,6 @@ public class LoginController {
 	@Autowired   //memberfield 주입 가능
 	private MemberDAO memberdao;
 	
-	
-	
 	@RequestMapping(method=RequestMethod.GET)
 	public String form() {
 		return "loginForm";
@@ -47,7 +45,7 @@ public class LoginController {
 		String view = null;
 		boolean isMember = memberdao.memberCheck(id, pwd);
 		if(isMember) {
-			session.setAttribute("USERID",id); //
+			session.setAttribute("USERID",id);
 			view = "loginSuccess";
 		}else {
 			view = "loginForm";

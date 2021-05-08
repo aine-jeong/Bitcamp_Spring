@@ -16,9 +16,9 @@ create table usermember(
 
 
 5.SpringMVC > 필수 jar 
--기본 : core , beans , expression , aop , context ...
--웹   : web , webmvc 
--의존 : logging ....
+-기본  : core , beans , expression , aop , context ...
+-웹    : web , webmvc 
+-의존  : logging ....
 -jsp  : jstl
 -DB   : ojdbc6.jar
 
@@ -32,8 +32,6 @@ ContextLoaderListener 가 생성한 컨텍스트가 root 컨텍스트가 되고 
 자식 컨텍스트들은 root 컨텍스트의 [설정 빈]을 사용 할 수 있다.
 그러기에 ContextLoaderListener 을 이용 공통빈 설정 가능. (DB작업 , 공통사항)
 *****
-
-
 
 6. 공통빈 설정하기
    (DB 작업 , JDBC 설정 코드)
@@ -64,7 +62,6 @@ ContextLoaderListener 가 생성한 컨텍스트가 root 컨텍스트가 되고 
 7. dispatcher 설정 (일반 빈 설정 , injection)
 
 8. filter 설정
-
   
 9.applicationContext.xml 공통빈에 
 --DB연동
