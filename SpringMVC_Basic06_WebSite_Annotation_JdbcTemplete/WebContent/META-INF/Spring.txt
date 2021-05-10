@@ -180,6 +180,7 @@ Data Layer에서 DAO를 명시하기 위해서 사용
 	-alter table member rename column "UID" to userid; 
 	>> MemberDto 수정
 	>> DAO uid 관련 내용 >> userid 수정
+	>>	   cphone (대소문자 변경) >> getter, setter 생성
 
 10 회원가입 (index.jsp) >> 링크 >> joinus/join.htm 요청 .... 
 	oracle 한글 한자 3Byte 대한 처리

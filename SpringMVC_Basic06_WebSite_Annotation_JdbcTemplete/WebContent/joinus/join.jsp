@@ -160,10 +160,10 @@
 								</dd>
 							</dl>						
 						</div>
+						<div id="buttonLine">
+							<input class="btn-okay button" type="submit" value="가입" />
+						</div>
 					</form>	
-					<div id="buttonLine">
-						<input class="btn-okay button" type="submit" value="가입" />
-					</div>
 				</div>
 				<div id="navi">
 					<h2>회원가입</h2>

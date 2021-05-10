@@ -187,14 +187,14 @@ public class CustomerController {
 				String fpath = path + "\\" + filename;
 				System.out.println(fpath);
 				
-				if(filename.equals("")) { //웹서버에 실 파일 업로드 과정
+				if(!filename.equals("")) { //웹서버에 실 파일 업로드 과정
 					FileOutputStream fs = null;
 					try {
 						fs = new FileOutputStream(fpath);
 						fs.write(multifile.getBytes());
 						
+						System.out.println("add가안돼 ㅠㅠ");
 						filenames.add(filename); //DB에 입력될 파일명
-						
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
@@ -258,12 +258,13 @@ public class CustomerController {
 				String fpath = path + "\\" + filename;
 				System.out.println(fpath);
 				
-				if(filename.equals("")) { //웹서버에 실 파일 업로드 과정
+				if(!filename.equals("")) { //웹서버에 실 파일 업로드 과정
 					FileOutputStream fs = null;
 					try {
 						fs = new FileOutputStream(fpath);
 						fs.write(multifile.getBytes());
 						
+						System.out.println("add가 안대여");
 						filenames.add(filename); //DB에 입력될 파일명
 						
 					} catch (Exception e) {
@@ -292,4 +293,15 @@ public class CustomerController {
 		//다시 상세페이지로 redirect
 		return "redirect:noticeDetail.htm?seq="+n.getSeq();
 	}
+	
+	@RequestMapping("noticeDel.htm") //customer/noticeDel.htm
+	public String noticeDel(String seq) {
+		try {
+			noticedao.delete(seq);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return "redirect:notice.htm";
+	}
+	
 }

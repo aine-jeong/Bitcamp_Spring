@@ -4,9 +4,11 @@ import java.sql.SQLException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import vo.Member;
 
+@Repository
 public class NewMemberDao implements MemberDao {
 
 	//jdbc Templete 객체에 의존한다

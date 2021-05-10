@@ -3,22 +3,22 @@ package vo;
 import java.util.Date;
 
 public class Member {
-	private String uid;
+	private String userid;
 	private String pwd;
 	private String name;
 	private String gender;
 	private String birth;
 	private String isLunar;
-	private String cPhone;
+	private String cphone;
 	private String email;
 	private String habit;
 	private Date   regDate;
 	
 	public String getUid() {
-		return uid;
+		return userid;
 	}
 	public void setUid(String uid) {
-		this.uid = uid;
+		this.userid = uid;
 	}
 	public String getPwd() {
 		return pwd;
@@ -51,10 +51,10 @@ public class Member {
 		this.isLunar = isLunar;
 	}
 	public String getCPhone() {
-		return cPhone;
+		return cphone;
 	}
 	public void setCPhone(String cPhone) {
-		this.cPhone = cPhone;
+		this.cphone = cPhone;
 	}
 	public String getEmail() {
 		return email;
@@ -74,4 +74,12 @@ public class Member {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+	@Override
+	public String toString() {
+		return "Member [userid=" + userid + ", pwd=" + pwd + ", name=" + name + ", gender=" + gender + ", birth="
+				+ birth + ", isLunar=" + isLunar + ", cphone=" + cphone + ", email=" + email + ", habit=" + habit
+				+ ", regDate=" + regDate + "]";
+	}
+	
 }
