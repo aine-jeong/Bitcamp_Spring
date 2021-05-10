@@ -14,11 +14,18 @@ public class Member {
 	private String habit;
 	private Date   regDate;
 	
-	public String getUid() {
+	
+	public String getUserid() {
 		return userid;
 	}
-	public void setUid(String uid) {
-		this.userid = uid;
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+	public String getCphone() {
+		return cphone;
+	}
+	public void setCphone(String cphone) {
+		this.cphone = cphone;
 	}
 	public String getPwd() {
 		return pwd;
@@ -49,12 +56,6 @@ public class Member {
 	}
 	public void setIsLunar(String isLunar) {
 		this.isLunar = isLunar;
-	}
-	public String getCPhone() {
-		return cphone;
-	}
-	public void setCPhone(String cPhone) {
-		this.cphone = cPhone;
 	}
 	public String getEmail() {
 		return email;
