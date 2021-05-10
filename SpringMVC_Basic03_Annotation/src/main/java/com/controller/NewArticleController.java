@@ -66,9 +66,7 @@ public class NewArticleController {
 		
 		return mv;
 	}
-	*/
 	
-	/*
 	//#### 
 	//2. Spring에서 parameter를 DTO 객체로 받기
 	//2.1. 자동화 >> 전제조건 >> input name="" 값이 DTO 객체의 member field명과 동일

@@ -1,5 +1,8 @@
 package com.aopEx2;
 
+import org.springframework.stereotype.Component;
+
+@Component(value="calc")
 public class NewCalc implements Calc{
 
 	@Override

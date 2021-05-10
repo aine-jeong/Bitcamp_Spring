@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -86,29 +87,25 @@ public class CustomerController {
 	
 	//3번 방법
 	@RequestMapping("notice.htm")
-	public String notices(String pg , String f , String q, Model model) {
+	public String notices(@RequestParam(value="pg" , defaultValue = "1") String pg , 
+						@RequestParam(value="f" , defaultValue = "TITLE") String f , 
+						@RequestParam(value="q" , defaultValue = "%%") String q, Model model) {
 		
+		/*
 		//default 값 설정
 		int page = 1;
 		String field="TITLE";
 		String query = "%%";
+		if(pg != null   && ! pg.equals("")) { page  = Integer.parseInt(pg); }
+		if(f != null   && ! f.equals("")) { field = f; }
+		if(q != null   && ! q.equals("")) { query = q; }
+		*/
 		
-		if(pg != null   && ! pg.equals("")) {
-			page  = Integer.parseInt(pg);
-		}
-	
-		if(f != null   && ! f.equals("")) {
-			field = f;
-		}
-
-		if(q != null   && ! q.equals("")) {
-			query = q;
-		}
 		
 		//DAO 작업
 		List<Notice> list = null;
 		try {
-			list = noticedao.getNotices(page, field, query);
+			list = noticedao.getNotices(Integer.parseInt(pg), f, q);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
@@ -154,9 +151,7 @@ public class CustomerController {
 		Notice notice = null;
 		try {
 			notice = noticedao.getNotice(seq);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		

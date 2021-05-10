@@ -7,8 +7,10 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 
-
+//Component: 개발자가 직접 작성한 Class를 Bean으로 만드는 것 / xml파일에 코드 추가해야 사용 가능
+@Component(value="logPrintBeforeAdvice")
 @Aspect
 public class LogPrintBeforeAdvice{
 	
