@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="se" uri="http://www.springframework.org/security/tags" %>
 
 <div id="header">
 	<div class="top-wrapper">
@@ -22,15 +24,45 @@
 		<h3 class="hidden">로그인메뉴</h3>
 		<ul id="loginmenu" class="block_hlist">
 			<li><a href="${pageContext.request.contextPath}/index.htm">HOME</a></li>
+			
+			
+			<%-- 
+			1번 (로그인했을 떄 달라지는 부분 x)
 			<li><a href="${pageContext.request.contextPath}/joinus/login.htm">로그인</a></li>
+			2번 (el&jstl 사용)
+			<c:if test="${empty pageContext.request.userPrincipal}">
+				<li><a href="${pageContext.request.contextPath}/joinus/login.htm">로그인</a></li>
+			</c:if>
+			<c:if test="${not empty pageContext.request.userPrincipal}">
+				<li><a href="${pageContext.request.contextPath}/logout">
+				(${pageContext.request.userPrincipal.name})로그아웃</a></li>
+			</c:if>
+			--%>
+			 
+			<!-- 3번 spring taglib -->
+			<se:authorize access="!hasRole('ROLE_USER')">
+				<li>
+					<a href="${pageContext.request.contextPath}/joinus/login.htm">로그인</a>
+				</li>
+			</se:authorize>
+			
+			<!-- userPrincipal.name -->
+			<se:authentication property="name" var="loginuser"/>
+			
+			<se:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')">
+			<!-- hasAnyRole: 인증된 사용자가, 파라미터에 담은 권한을 가지고 있다면! -->
+					<li><a href="${pageContext.request.contextPath}/logout">[${loginuser}]로그아웃</a></li>
+			</se:authorize>
+			
+			
 			<li><a href="${pageContext.request.contextPath}/joinus/join.htm">회원가입</a></li>
 		</ul>
 		<h3 class="hidden">회원메뉴</h3>
 		<ul id="membermenu" class="clear">
 			<li><a href=""><img src="${pageContext.request.contextPath}/images/menuMyPage.png" alt="마이페이지" /></a>
 			</li>
-			<li><a href="${pageContext.request.contextPath}/customer/notice.htm"><img
-					src="${pageContext.request.contextPath}/images/menuCustomer.png" alt="고객센터" /></a></li>
+			<li><a href="${pageContext.request.contextPath}/customer/notice.htm">
+			<img src="${pageContext.request.contextPath}/images/menuCustomer.png" alt="고객센터" /></a></li>
 		</ul>
 	</div>
 </div>

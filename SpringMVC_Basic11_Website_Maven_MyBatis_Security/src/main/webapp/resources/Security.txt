@@ -268,7 +268,7 @@ login.jsp 검증코드 추가
 ->login 성공 => loginout
 ->login 하지 않은 상태라면 => login
 ->일반적인 경우 : session 값의 유무에 판단.........
-->자동화 작업 : 내부적으로 session 만들어서 관리 (객체를 만들어서 관리) 무었을 >> 인증된 ID 값을 ...
+->자동화 작업 : 내부적으로 session 만들어서 관리 (객체를 만들어서 관리) 무엇을 >> 인증된 ID 값을
 ​
 ​
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
