@@ -3,6 +3,7 @@ package service;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
@@ -82,7 +87,7 @@ public class CustomerService {
 	}
 
 	// 글쓰기처리 서비스 함수
-	public String noticeReg(Notice n, HttpServletRequest request) throws Exception {
+	public String noticeReg(Notice n, HttpServletRequest request, Principal principal) throws Exception {
 
 		List<CommonsMultipartFile> files = n.getFiles();
 		List<String> filenames = new ArrayList<String>(); // 파일명관리
@@ -103,7 +108,33 @@ public class CustomerService {
 			}
 
 		}
-
+		
+		/*
+		 #### 사용자의 권한 정보가 필요할 때 사용 ####
+		 
+		//인증된 사용자정보를 가지고 온다
+		//n.setWriter(null) // session.getAttribut("id")
+		
+		//Spring의 Security 모든 정보를 가지고오기
+		SecurityContext context = SecurityContextHolder.getContext();
+		//그 정보들 중 인증에 관련된 것만 가져오기
+		Authentication auth = context.getAuthentication();
+		//userDetail객체가 넘어온다 (사용자의 정보 가져오기)
+		//UserDetails userinfo: 로그인한 사용자의 정보 (권한정보)
+		UserDetails userinfo = (UserDetails)auth.getPrincipal();
+		// 권한정보: getAuthorities
+		System.out.println("권한정보: " + userinfo.getAuthorities()); //권한 여러개 다 가져온당
+		// 사용자 ID: getUsername
+		System.out.println("사용자ID: " + userinfo.getUsername());
+		
+		n.setWriter(userinfo.getUsername()); //인증된 사용자의 ID값이 들어간다.
+		*/
+		
+		// ## 단순히 ID정보만 필요할 때는 ? ##
+		//파라미터에 'Principal principal' 넣기
+		//Principal principal : 인증되면 내부적으로 생성된 인증 객체가 들어온다
+		n.setWriter(principal.getName());
+		
 		// DB 파일명 저장
 		n.setFileSrc(filenames.get(0));
 		n.setFileSrc2(filenames.get(1));

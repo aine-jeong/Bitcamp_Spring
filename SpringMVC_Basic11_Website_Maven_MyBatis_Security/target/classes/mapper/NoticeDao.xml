@@ -129,7 +129,7 @@ result : interface 와 mapper 있으면 실행
 	 		SELECT MAX(TO_NUMBER(SEQ))+1 FROM NOTICES
 	 	</selectKey>
 		 	INSERT INTO NOTICES(SEQ, TITLE, CONTENT, WRITER, REGDATE, HIT, FILESRC , FILESRC2) 
-		 	VALUES( #{seq}, #{title}, #{content}, 'bituser', SYSDATE, 0, #{fileSrc},#{fileSrc2})
+		 	VALUES( #{seq}, #{title}, #{content}, #{writer}, SYSDATE, 0, #{fileSrc},#{fileSrc2})
 	 </insert>
 	  
 </mapper>

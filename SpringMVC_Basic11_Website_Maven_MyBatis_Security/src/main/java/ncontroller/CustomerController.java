@@ -3,6 +3,7 @@ package ncontroller;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,10 +65,10 @@ public class CustomerController {
 	
 	//글쓰기 처리(POST)
 	@RequestMapping(value="noticeReg.htm", method = RequestMethod.POST)
-	public String noticeReg(Notice n ,HttpServletRequest request) {
+	public String noticeReg(Notice n ,HttpServletRequest request, Principal principal) {
 		String url = null;
 		try {
-			url = customerservice.noticeReg(n, request);
+			url = customerservice.noticeReg(n, request, principal);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
