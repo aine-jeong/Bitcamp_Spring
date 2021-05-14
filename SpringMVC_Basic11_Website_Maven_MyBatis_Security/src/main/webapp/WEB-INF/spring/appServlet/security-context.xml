@@ -88,9 +88,10 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		​
 		**
 		/login 요청 처리는 여전이 spring 위임하고 있다 .....
-		기본적인 요청 주소 , parametre 값은 정해진 되로
+		기본적인 요청 주소 , parametre 값은 정해진 대로
 	 	 -->
-	 	<!-- 2단계 코드 -->
+	 	<!-- 2단계 코드
+	 	
 	 	<security:http auto-config="true">
 	 		<security:csrf disabled="true"/>
 	 		<security:form-login login-page="/joinus/login.htm" 
@@ -107,5 +108,37 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 	 			</security:user-service>
 	 		</security:authentication-provider>
 	 	</security:authentication-manager>
+	 	
+	 	 -->
+	 	 
+	 	 <!-- 21-05-14 수업 / in-memory방식 -> DB 방식 -->
+	 	 <!-- default-target-url : 로그인 성공시 이동시킬 url -->
+	 	 <!-- 쿼리를 던지고 권한 체크까지 다 해준당 (+ 컨트롤러, 서비스 역할도!) -->
+	 	 <!-- in-memory랑 똑같이 돌아야된당 -->
+	 	 <security:http auto-config="true">
+	 		<security:csrf disabled="true"/>
+	 		<security:form-login default-target-url="/index.htm"
+	 							 login-page="/joinus/login.htm" 
+	 							 authentication-failure-url="/joinus/login.htm?error"/>
+	 							 
+	 		<security:logout logout-success-url="/index.htm"/>
+	 		
+	 		<security:intercept-url pattern="/customer/*Reg.htm" access="hasRole('ROLE_USER')"/>  
+	 		<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+	 		
+	 	</security:http>
+	 	<security:authentication-manager>
+	 		<security:authentication-provider> 
+	 			<security:jdbc-user-service data-source-ref="driverManagerDataSource"
+	 			users-by-username-query="select userid , pwd as password , 1 enabled from member where userid=?" 
+	 			authorities-by-username-query="select m.userid, r.role_name
+												from member m join roll r
+												on m.userid = r.userid
+												where m.userid=?"
+	 			/>
+	 		</security:authentication-provider>
+	 	</security:authentication-manager>
+	 	 
+	 	
 	 
 </beans>
