@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+	/i18n.do?lang=ko 또는 /i18n.do?lang=en 등으로 요청을 보내면
+	컨트롤러 앞단에서 요청을 가로채서 언어를 변경하는 역할 수행
+-->
+<interceptors>
+	<beans:bean id="localeChangeInterceptor"
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+		<beans:property name="paramName" value="lang" />
+	</beans:bean>
+</interceptors>
