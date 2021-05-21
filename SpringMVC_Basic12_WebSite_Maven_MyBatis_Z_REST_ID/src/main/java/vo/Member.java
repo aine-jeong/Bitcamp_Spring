@@ -2,6 +2,9 @@ package vo;
 
 import java.util.Date;
 
+import lombok.Data;
+
+@Data
 public class Member {
 	private String userid;
 	private String pwd;
@@ -14,7 +17,7 @@ public class Member {
 	private String habit;
 	private Date   regDate;
 	
-	
+	/*
 	public String getUserid() {
 		return userid;
 	}
@@ -88,5 +91,5 @@ public class Member {
 				+ ", regDate=" + regDate + "]";
 	}
 	
-	
+	*/
 }
