@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 //다중 채팅
 //서버 1개
-//여러명의 클라이언트 접속
+//여러명의 클라이언트 접속 (채팅방 1개) > HashMap
 //클라이언트 1명( socket )
 public class Ex05_TCP_Multi_Chatt_Server {
 	
@@ -15,26 +15,32 @@ public class Ex05_TCP_Multi_Chatt_Server {
 	Socket socket = null;
 	//KEY POINT
 	HashMap<String,DataOutputStream> ClientMap;
+	//DataOutputStream은 각각의 socket이 갖고있는 통로의 주소값!
+	//so, HashMap의 value에는 Socket이 직접 들어갈수도 있다.
+	//## 다중채팅의 핵심은 '여러 방을 어떻게 관리할 것인가?' 이다. ##
 	
 	//김씨 , Socket
 	//이씨 , Socket
-	
-	
+
+	//서버의 default constructor
 	Ex05_TCP_Multi_Chatt_Server(){
 		//각 클라이언트 (socket 가지는 출력객체를 관리)
 		ClientMap = new HashMap<>();
 	}
+	
 	//1. 서버 초기화 작업
 	public void init() {
 		try {
 			serversocket = new ServerSocket(9999);
 			System.out.println("[서버시작 ... 응답대기 ...]");
+			//while을 true로 돌리지 않으면, 서버가 응답 한번 받고 꺼진다
 			while(true) {
+			//클라이언트가 들어오면!
 			socket = serversocket.accept();
-			System.out.println("[" + socket.getInetAddress() + "/" 
-			                  + socket.getPort() + "]");
+			//접속된 socket이 가지고있는 address값 출력
+			System.out.println("[" + socket.getInetAddress() + "/" + socket.getPort() + "]");
 			//코드작업
-			//클라이언트 접속시 마다 ....
+			//클라이언트가 접속할 때 마다 소켓을 만들어줘야 한다.
 				Thread client = new MultiServerRev(socket);
 				client.start();
 			//
@@ -46,15 +52,17 @@ public class Ex05_TCP_Multi_Chatt_Server {
 		}
 	}
 	
-	//2. 접속된 모든 클라이언트에게 (soket) 메시지를 전달하는 함수
+	//2. 접속된 모든 클라이언트에게 (socket) 메시지를 전달하는 함수
 	//Map(key ,value)
 	//key => 사용자ID (고유한 값) ex) kglim , hong , kim , lee ..
 	//ClientMap<"hong" 각각의  socket객체에서 얻어낸 DataOutPutStream객체 저장>)
 	//ClientMap<"kim"  각각의  socket객체에서 얻어낸 DataOutPutStream객체 저장>)
 	void sendAllMsg(String msg) {
+		//key의 집합 뽑아내기
 		Iterator<String> ClientKeySet = ClientMap.keySet().iterator();
 		while(ClientKeySet.hasNext()) {
 			try {
+				//ClientMap이 갖고 있는 key값을 통해서 value값(출력주소를 value로 설정해둠)을 얻는다.
 				DataOutputStream clientout = ClientMap.get(ClientKeySet.next());
 				//각각의 접속한 client 에게 메시지 출력
 				clientout.writeUTF(msg);

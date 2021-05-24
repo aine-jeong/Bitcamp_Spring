@@ -62,6 +62,7 @@ public class Ex05_TCP_Multi_Chatt_Client extends JFrame implements ActionListene
 		
 	}
 	
+	//actionPerformed: 어떤 이벤트가 발생하면 자동으로 호출되는 함수
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//TextField 입력하고 Enter 처리하면
