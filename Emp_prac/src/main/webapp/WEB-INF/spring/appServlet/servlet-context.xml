@@ -21,7 +21,12 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="kr.or.bit" />
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<context:annotation-config/>
+	<context:component-scan base-package="kr.or.bit.controller" />
+	<context:component-scan base-package="kr.or.bit.dao"/>
+	
+	<context:component-scan base-package="kr.ot.bit" />
 	
 	
 	
